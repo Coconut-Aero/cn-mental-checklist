@@ -27,7 +27,7 @@
         >
           Coconut-Aero
         </a>
-        构建 ｜ 当前版本 v0.1  |  <span class="font-medium text-indigo-600"> Insider Alpha Version </span>
+        构建 ｜ 当前版本 v0.1   |   <a href="https://icp.gov.moe/?keyword=20250702"> 萌ICP备20250702号 </a>
 
       </footer>
 

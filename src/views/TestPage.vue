@@ -38,7 +38,9 @@
         <!-- 测试说明 -->
         <div v-if="!started" key="intro" class="max-w-2xl mt-12 text-center">
           <h1 class="text-3xl font-bold mb-4">{{ version?.title_name || '未知测试' }}</h1>
-          <p class="text-gray-600 dark:text-gray-300 mb-6">{{ version?.desc || '无描述' }}</p>
+          <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-prose break-words mx-auto">
+            {{ version?.desc || '无描述' }}
+          </p>
           <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow text-left text-sm space-y-3 text-gray-700 dark:text-gray-200">
             <p>你将会看到一系列问题。请根据你的实际情况回答这些问题</p>
             <p><b>提示：</b>请跟随第一直觉作答。</p>
@@ -125,7 +127,7 @@
               </p>
 
             </div>
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-2" v-if ="!currentQuestion.special_choices">
               <button
                 v-for="(label, index) in likertLabels"
                 :key="index"
@@ -135,6 +137,17 @@
                 {{ label }}
               </button>
             </div>
+            <div class="flex flex-col gap-2" v-else>
+              <button
+                v-for="(choice, index) in currentQuestion.special_choices"
+                :key="index"
+                @click="answer(index)"
+                class="py-2 px-4 rounded-xl bg-white dark:bg-gray-700 border hover:bg-blue-50 dark:hover:bg-gray-600 transition text-sm shadow active:scale-95"
+              >
+                {{ choice.text }}
+              </button>
+            </div>
+
           </div>
         </div>
 

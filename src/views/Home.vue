@@ -34,6 +34,7 @@
 <script setup>
 const versions = [
   { id: 'scl_90', name: 'SCL-90 测试', icon: '🧠', desc: 'SCL-90 症状自评表' },
+  { id: 'phq_9', name: 'PHQ-9 测试', icon: '📋', desc: '患者健康问卷' },
 
 ]
 </script>

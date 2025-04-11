@@ -59,7 +59,9 @@ const copyLink = async () => {
       测试结果：{{ versionData?.title_name }}
     </h1>
 
-    <p class="mb-6 text-gray-600 dark:text-gray-300 italic">{{ versionData?.desc }}</p>
+    <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-prose break-words mx-auto italic">
+      {{ versionData?.desc || '无描述' }}
+    </p>
 
     <!-- 返回首页按钮 -->
     <div class="w-full max-w-5xl mt-6 flex justify-between">
