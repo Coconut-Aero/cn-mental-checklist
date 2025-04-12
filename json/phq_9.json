@@ -2,7 +2,10 @@
     "version": "PHQ-9",
     "title_name": "PHQ-9 测试",
     "title": "PHQ-9",
-    "desc": "PHQ-9 患者健康问卷, 本测试参考 https://med.stanford.edu/fastlab/research/imapp/msrs/_jcr_content/main/accordion/accordion_content3/download_256324296/file.res/PHQ9%20id%20date%2008.03.pdf",
+    "desc": "PHQ-9 患者健康问卷, 本测试参考 ",
+
+    "refer_url": "https://med.stanford.edu/fastlab/research/imapp/msrs/_jcr_content/main/accordion/accordion_content3/download_256324296/file.res/PHQ9%20id%20date%2008.03.pdf",
+
     "full_mark": "27",
 
     "choices": [
@@ -13,6 +16,8 @@
     ],
 
     "warning": "本测试结果仅供参考，不能作为专业医疗检查或诊断的依据。若您感到身体不适或出现其他症状，建议尽快前往正规医疗机构就诊。",
+
+    "questions_header": "在过去的两周内，有多少时候您受到以下问题所困扰？",
 
     "questions": [
       { "text": "对做事缺乏兴趣或乐趣" },
