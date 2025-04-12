@@ -4,7 +4,8 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const versionId = route.params.versionId as string;
-const resultData = ref<Array<{ title: string; result: number; full_mark: number; status: string; }>>([]);
+const resultData = ref<Array<{ title: string; result: number; full_mark: number; 
+                               status?: string; caption?: string; caption_class?: string; caption_status?: string;}>>([]);
 
 // 解析 scoresData 参数
 try {
@@ -61,6 +62,7 @@ const copyLink = async () => {
 
     <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-prose break-words mx-auto italic">
       {{ versionData?.desc || '无描述' }}
+      <a v-if="versionData?.refer_url" :href="versionData?.refer_url" target="_blank" class="text-blue-500 hover:underline">这个链接</a>
     </p>
 
     <!-- 返回首页按钮 -->
@@ -106,7 +108,9 @@ const copyLink = async () => {
             class="absolute top-0 left-0 h-full transition-all duration-500"
             :style="{
               width: ((item.result / item.full_mark) * 100) + '%',
-              background: 'linear-gradient(to right, #48c6ef, #6f86d6)',
+              background: (index % 2 === 0)
+                ? 'linear-gradient(to right, #48c6ef, #6f86d6)'
+                : 'linear-gradient(to left, #f79c42, #d35e46)',
               transform: 'translateX(0%)'
             }"
           ></div>
@@ -123,7 +127,22 @@ const copyLink = async () => {
         >
           得分：{{ item.result }} / {{ item.full_mark }}（{{ ((item.result / item.full_mark) * 100).toFixed(0) }}%）
         </p>
+        <p
+          v-if="item.caption"
+          class="text-sm mt-2 italic text-gray-600 dark:text-gray-300"
+        >
+          {{ item.caption }}
+        </p>
+        <p v-if="item.caption_class && item.caption_status" class="text-sm mt-2 italic text-gray-600 dark:text-gray-300">
+          {{
+            versionData?.captions.find(cls => cls.caption_class === item.caption_class)
+              ?.captions.find(stat => stat.status === item.caption_status)
+              ?.caption || '无匹配说明'
+          }}
+        </p>
+
       </div>
+      
     </div>
     <div v-else class="text-red-500">无法读取测试结果数据。</div>
 

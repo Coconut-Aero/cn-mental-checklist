@@ -30,13 +30,14 @@
 
 - ✅ SCL-90 综合症状自评量表（Symptom Checklist-90）
 - ✅ PHQ-9 患者健康问卷（Patient Health Questionnaire）
+- ✅ GAD-7 广泛性焦虑症量表（General Anxiety Disorder）
 
 ---
 
 ## 🚧 计划功能
 
 - 🔜 MBTI 性格类型测试
-- 🔜 更多心理学量表（GAD-7、EPQ等）
+- 🔜 更多心理学量表
 - 🔜 测评结果导出与分析
 - 🔜 响应式移动端优化
 

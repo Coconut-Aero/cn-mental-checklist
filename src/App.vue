@@ -1,14 +1,20 @@
 <template>
   <div :class="{ dark: isDark }">
-    <!-- 暗色模式切换按钮 -->
-    <div class="fixed top-4 right-4 z-50">
-      <button
-        @click="toggleDark"
-        class="px-3 py-1 rounded-xl text-sm border bg-white hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 transition"
-      >
-        {{ isDark ? '☀️ 亮色' : '🌙 暗色' }}
-      </button>
-    </div>
+  <!-- 暗色模式切换按钮 -->
+  <div class="fixed top-2 right-2 sm:top-4 sm:right-4 z-50">
+    <button
+      @click="toggleDark"
+      class="flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium
+            border shadow-lg bg-white hover:bg-gray-100 text-gray-800
+            dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-700
+            transition-all duration-300 backdrop-blur-sm"
+      aria-label="切换暗色模式"
+    >
+      <span class="text-lg">{{ isDark ? '☀️' : '🌙' }}</span>
+      <span class="hidden sm:inline">{{ isDark ? '亮色模式' : '暗色模式' }}</span>
+    </button>
+  </div>
+
 
     <!-- 页面容器 -->
     <div class="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-colors duration-300">
@@ -27,7 +33,9 @@
         >
           Coconut-Aero
         </a>
-        构建 ｜ 当前版本 v0.1   |   <a href="https://icp.gov.moe/?keyword=20250702"> 萌ICP备20250702号 </a>
+        构建 ｜ 当前版本 v0.1 
+        <br />
+        <a href="https://icp.gov.moe/?keyword=20250702"> 萌ICP备20250702号 </a>
 
       </footer>
 

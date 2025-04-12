@@ -18,6 +18,11 @@
           返回首页
         </router-link>
 
+        <p v-if="version?.questions_header && started && currentQuestion" 
+          class="text-xl font-semibold text-center flex-1 hidden sm:block">
+          {{ version?.questions_header }}
+        </p>
+
         <!-- 重新开始按钮 -->
         <div v-if="started && currentIndex > 0">
           <button
@@ -31,6 +36,16 @@
             重新开始测试
           </button>
         </div>
+        <div v-else class="invisible">
+          <button
+            class="inline-flex items-center px-4 py-2 text-sm rounded-xl 
+                    bg-white border border-gray-300 text-gray-800 shadow
+                    dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100"
+          >
+            重新开始测试
+          </button>
+        </div>
+
       </div>
 
       <!-- 动画过渡：内容区域 -->
@@ -40,7 +55,9 @@
           <h1 class="text-3xl font-bold mb-4">{{ version?.title_name || '未知测试' }}</h1>
           <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-prose break-words mx-auto">
             {{ version?.desc || '无描述' }}
+            <a v-if="version?.refer_url" :href="version?.refer_url" target="_blank" class="text-blue-500 hover:underline">这个链接</a>
           </p>
+            
           <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow text-left text-sm space-y-3 text-gray-700 dark:text-gray-200">
             <p>你将会看到一系列问题。请根据你的实际情况回答这些问题</p>
             <p><b>提示：</b>请跟随第一直觉作答。</p>
@@ -60,18 +77,25 @@
 
         <!-- 答题界面 -->
         <div v-else-if="currentQuestion" key="question" class="w-full max-w-5xl mt-6">
+          <p v-if="version?.questions_header" 
+            class="text-xl font-semibold text-center flex-1 block sm:hidden">
+            {{ version?.questions_header }}
+          </p>
           <!-- 进度条 -->
           <div class="mb-6">
             <div class="flex justify-between text-sm text-gray-500 mb-1">
               <span>第 {{ currentIndex + 1 }} / {{ totalQuestions }} 题</span>
-              <span>{{ Math.round(((currentIndex + 1) / totalQuestions) * 100) }}%</span>
+              <span>{{ Math.round((currentIndex / totalQuestions) * 100) }}%</span>
             </div>
             <div class="w-full h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
               <div
                 class="h-full bg-blue-500 transition-all duration-500"
-                :style="{ width: ((currentIndex + 1) / totalQuestions * 100) + '%' }"
+                :style="{ width: (currentIndex / totalQuestions * 100) + '%' }"
               ></div>
             </div>
+
+            
+
           </div>
 
           <!-- 返回上一题 -->
@@ -119,6 +143,7 @@
               />
               <p class="text-xl mt-4 font-semibold text-center block-width">{{ currentQuestion.text }}</p>
 
+
               <p
                 class="text-sm text-gray-400 dark:text-gray-500 mt-1 break-word"
                 v-if="currentQuestion.comment"
@@ -132,7 +157,7 @@
                 v-for="(label, index) in likertLabels"
                 :key="index"
                 @click="answer(index)"
-                class="py-2 px-4 rounded-xl bg-white dark:bg-gray-700 border hover:bg-blue-50 dark:hover:bg-gray-600 transition text-sm shadow active:scale-95"
+                class="py-2 px-4 sm:px-6 md:px-8 rounded-xl bg-white dark:bg-gray-700 border hover:bg-blue-50 dark:hover:bg-gray-600 transition text-sm sm:text-base md:text-lg shadow active:scale-95"
               >
                 {{ label }}
               </button>
@@ -142,7 +167,7 @@
                 v-for="(choice, index) in currentQuestion.special_choices"
                 :key="index"
                 @click="answer(index)"
-                class="py-2 px-4 rounded-xl bg-white dark:bg-gray-700 border hover:bg-blue-50 dark:hover:bg-gray-600 transition text-sm shadow active:scale-95"
+                class="py-2 px-4 sm:px-6 md:px-8 rounded-xl bg-white dark:bg-gray-700 border hover:bg-blue-50 dark:hover:bg-gray-600 transition text-sm sm:text-base md:text-lg shadow active:scale-95"
               >
                 {{ choice.text }}
               </button>
@@ -295,7 +320,7 @@ const navigateToResults = () => {
 
 /* 你可以放在组件 <style> 块中，建议加上 scoped */
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.1s ease;
 }
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
