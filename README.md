@@ -31,6 +31,7 @@
 - ✅ SCL-90 综合症状自评量表（Symptom Checklist-90）
 - ✅ PHQ-9 患者健康问卷（Patient Health Questionnaire）
 - ✅ GAD-7 广泛性焦虑症量表（General Anxiety Disorder）
+- ✅ EPQ-88 艾森克人格问卷 龚耀先版本 （Eysenck Personality Questionnaire）
 
 ---
 

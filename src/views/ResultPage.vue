@@ -103,7 +103,7 @@ const copyLink = async () => {
         <h2 class="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-100">
           {{ item.title }}
         </h2>
-        <div v-if="item.result && item.full_mark">
+        <div v-if="item.full_mark !== undefined && item.full_mark !== null">
           <div class="relative w-full h-6 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
             <div
               class="absolute top-0 left-0 h-full transition-all duration-500"
@@ -116,10 +116,10 @@ const copyLink = async () => {
               }"
             ></div>
           </div>
-          <p v-if="item.status && item.full_mark && item.result" class="text-sm mt-2 text-gray-500 dark:text-gray-400">
+          <p v-if="item.status && item.full_mark !== undefined && item.full_mark !== null" class="text-sm mt-2 text-gray-500 dark:text-gray-400">
             得分：{{ item.result }} / {{ item.full_mark }}（{{ ((item.result / item.full_mark) * 100).toFixed(0) }}%），{{ item.status }}
           </p>
-          <p v-else-if="item.full_mark && item.result" class="text-sm mt-2 text-gray-500 dark:text-gray-400">
+          <p v-else-if="item.full_mark !== undefined && item.full_mark !== null" class="text-sm mt-2 text-gray-500 dark:text-gray-400">
             得分：{{ item.result }} / {{ item.full_mark }}（{{ ((item.result / item.full_mark) * 100).toFixed(0) }}%）
           </p>
       </div>
