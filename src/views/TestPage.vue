@@ -65,6 +65,9 @@
             <p v-if="version?.warning" class="text-red-400">
               <b> {{ version?.warning }} </b>
             </p>
+            <p v-if="version?.note" class="text-gray-500">
+              <b> {{ version?.note }} </b>
+            </p>
             
           </div>
           <button
@@ -156,6 +159,7 @@
               <button
                 v-for="(label, index) in likertLabels"
                 :key="index"
+                :disabled="buttonPressCount >= totalQuestions"
                 @click="answer(index)"
                 class="py-2 px-4 sm:px-6 md:px-8 rounded-xl bg-white dark:bg-gray-700 border hover:bg-blue-50 dark:hover:bg-gray-600 transition text-sm sm:text-base md:text-lg shadow active:scale-95"
               >
@@ -167,6 +171,7 @@
                 v-for="(choice, index) in currentQuestion.special_choices"
                 :key="index"
                 @click="answer(index)"
+                :disabled="buttonPressCount >= totalQuestions"
                 class="py-2 px-4 sm:px-6 md:px-8 rounded-xl bg-white dark:bg-gray-700 border hover:bg-blue-50 dark:hover:bg-gray-600 transition text-sm sm:text-base md:text-lg shadow active:scale-95"
               >
                 {{ choice.text }}
@@ -213,6 +218,7 @@ const version = ref(null)
 const started = ref(false)
 const currentIndex = ref(0)
 const answers = ref([])
+const buttonPressCount = ref(0)
 
 const totalQuestions = ref(0)
 const shuffledQuestions = ref([])
@@ -254,8 +260,12 @@ const startTest = () => {
 }
 
 const answer = (userChoice) => {
-  answers.value.push(userChoice)
-  currentIndex.value++
+  // 如果计数器未达到 totalQuestions，则允许操作
+  if (buttonPressCount.value < totalQuestions.value) {
+    answers.value.push(userChoice)
+    currentIndex.value++
+    buttonPressCount.value++ // 更新计数器
+  }
 }
 
 const previousQuestion = () => {
@@ -269,6 +279,7 @@ const restartTest = () => {
   started.value = false
   currentIndex.value = 0
   answers.value = []
+  buttonPressCount.value = 0 // 重置计数器
 }
 
 const navigateToResults = () => {

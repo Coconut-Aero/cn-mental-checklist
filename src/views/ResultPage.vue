@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const versionId = route.params.versionId as string;
-const resultData = ref<Array<{ title: string; result: number; full_mark: number; 
+const resultData = ref<Array<{ title: string; result?: number; full_mark?: number; 
                                status?: string; caption?: string; caption_class?: string; caption_status?: string;}>>([]);
 
 // 解析 scoresData 参数
@@ -103,30 +103,26 @@ const copyLink = async () => {
         <h2 class="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-100">
           {{ item.title }}
         </h2>
-        <div class="relative w-full h-6 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
-          <div
-            class="absolute top-0 left-0 h-full transition-all duration-500"
-            :style="{
-              width: ((item.result / item.full_mark) * 100) + '%',
-              background: (index % 2 === 0)
-                ? 'linear-gradient(to right, #48c6ef, #6f86d6)'
-                : 'linear-gradient(to left, #f79c42, #d35e46)',
-              transform: 'translateX(0%)'
-            }"
-          ></div>
-        </div>
-        <p
-          v-if="item.status"
-          class="text-sm mt-2 text-gray-500 dark:text-gray-400"
-        >
-          得分：{{ item.result }} / {{ item.full_mark }}（{{ ((item.result / item.full_mark) * 100).toFixed(0) }}%），{{ item.status }}
-        </p>
-        <p
-          v-else
-          class="text-sm mt-2 text-gray-500 dark:text-gray-400"
-        >
-          得分：{{ item.result }} / {{ item.full_mark }}（{{ ((item.result / item.full_mark) * 100).toFixed(0) }}%）
-        </p>
+        <div v-if="item.result && item.full_mark">
+          <div class="relative w-full h-6 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+            <div
+              class="absolute top-0 left-0 h-full transition-all duration-500"
+              :style="{
+                width: ((item.result / item.full_mark) * 100) + '%',
+                background: (index % 2 === 0)
+                  ? 'linear-gradient(to right, #48c6ef, #6f86d6)'
+                  : 'linear-gradient(to left, #f79c42, #d35e46)',
+                transform: 'translateX(0%)'
+              }"
+            ></div>
+          </div>
+          <p v-if="item.status && item.full_mark && item.result" class="text-sm mt-2 text-gray-500 dark:text-gray-400">
+            得分：{{ item.result }} / {{ item.full_mark }}（{{ ((item.result / item.full_mark) * 100).toFixed(0) }}%），{{ item.status }}
+          </p>
+          <p v-else-if="item.full_mark && item.result" class="text-sm mt-2 text-gray-500 dark:text-gray-400">
+            得分：{{ item.result }} / {{ item.full_mark }}（{{ ((item.result / item.full_mark) * 100).toFixed(0) }}%）
+          </p>
+      </div>
         <p
           v-if="item.caption"
           class="text-sm mt-2 italic text-gray-600 dark:text-gray-300"
