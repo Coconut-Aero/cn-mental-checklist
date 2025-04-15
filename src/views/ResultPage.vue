@@ -95,6 +95,13 @@ const copyLink = async () => {
 
     <!-- 渲染结果 -->
     <div v-if="resultData.length > 0" class="mt-8">
+      <!-- 警告 -->
+      <p v-if="versionData?.warning"
+        class="p-3 border-l-4 border-red-400 dark:border-red-500 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 text-sm rounded mb-4">
+        ⚠️ {{ versionData?.warning }}
+      </p>
+
+      <!-- 结果展示 -->
       <div
         v-for="(item, index) in resultData"
         :key="index"

@@ -37,6 +37,7 @@ const versions = [
   { id: 'phq_9', name: 'PHQ-9 测试', icon: '🩺', desc: '患者健康问卷' },
   { id: 'gad_7', name: 'GAD-7 测试', icon: '🩺', desc: '广泛性焦虑症自评量表' },
   { id: 'epq_88', name: 'EPQ-88 测试', icon: '📊', desc: '艾森克人格问卷 龚耀先版本' },
+  { id: 'epq_85', name: 'EPQ-85 测试', icon: '📊', desc: '艾森克人格问卷 陈仲庚版本' },
 
 /* 未来可能计划加入  
   { id: 'hamd_24', name: 'HAMD-24 测试', icon: '🧑‍⚕️', desc: '汉密尔顿抑郁量表' },
