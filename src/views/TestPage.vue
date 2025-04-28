@@ -296,6 +296,7 @@ const answer = (userChoice) => {
 const previousQuestion = () => {
   if (currentIndex.value > 0) {
     currentIndex.value--
+    buttonPressCount.value--
     answers.value.pop()
   }
 }
