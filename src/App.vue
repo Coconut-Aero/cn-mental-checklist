@@ -2,23 +2,11 @@
   <div :class="{ dark: isDark }">
   <!-- 暗色模式切换按钮 -->
   <div class="fixed top-2 right-2 sm:top-4 sm:right-4 z-50">
-  <!-- 移动端按钮 -->
-  <button
-    @click="toggleDark"
-    class="flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium
-          border shadow-lg bg-white hover:bg-gray-100 text-gray-800
-          dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-700
-          transition-all duration-300 backdrop-blur-sm sm:hidden"
-    aria-label="切换暗色模式"
-  >
-    <span class="text-lg">{{ isDark ? '☀️' : '🌙' }}</span>
-    <span class="hidden sm:inline">{{ isDark ? '亮色模式' : '暗色模式' }}</span>
-  </button>
 
   <!-- 左上角汉堡按钮 -->
   <button
     @click="isMenuOpen = !isMenuOpen"
-    class="fixed top-2 left-2 z-50 w-12 h-12 flex items-center justify-center 
+    class="fixed top-2 right-2 z-50 w-12 h-12 flex items-center justify-center 
          rounded-lg border shadow-lg transition 
          bg-white text-gray-800 border-gray-300 
          hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-700"
@@ -35,30 +23,48 @@
       class="fixed inset-0 bg-black bg-opacity-40 z-40"
       @click.self="isMenuOpen = false"
     >
-      <div class="fixed top-16 left-2 w-90 p-4 rounded-xl shadow-lg border 
+      <div class="fixed top-16 right-2 w-90 p-4 rounded-xl shadow-lg border 
          bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100
          transition-all z-50 space-y-4">
         <h2 class="text-lg font-bold">🌸 菜单</h2>
 
-        <div class="space-y-2">
-          <h3 class="font-medium text-gray-700 dark:text-gray-300">设置主题色（测试阶段） 🎨</h3>
-          <div class="flex flex-wrap gap-2">
-            <button
-              v-for="theme in themes"
-              :key="theme.name"
-              @click="setTheme(theme.color)"
-              :style="{ backgroundColor: theme.color }"
-              class="w-8 h-8 rounded-full border border-gray-300 dark:border-gray-600"
-            ></button>
-          </div>
-          <button
-            @click="clearTheme"
-            class="w-8 h-8 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center text-sm"
-          >
-            🗑️
-          </button>
-        </div>
 
+          <!-- 电脑端滑块 -->
+          <div class="flex justify-center items-center">
+          <label class="flex items-center cursor-pointer select-none">
+            <div class="relative w-32 h-12">
+              <input type="checkbox" class="sr-only" v-model="isDark" />
+
+              <!-- 滑槽 -->
+              <div
+                class="block w-full h-full rounded-full transition-all duration-300
+                      bg-gray-300 dark:bg-gray-600"
+              ></div>
+
+              <!-- 文字放上层 -->
+              <transition name="fade" mode="out-in">
+                <div
+                  :key="isDark"  
+                  class="absolute inset-0 flex items-center text-sm font-medium
+                        text-gray-800 dark:text-gray-100 z-20 pointer-events-none"
+                  :class="isDark ? 'justify-start pl-4' : 'justify-end pr-4'"
+                >
+                  {{ isDark ? '暗色模式' : '亮色模式' }}
+                </div>
+              </transition>
+            
+
+              <!-- 小圆球 -->
+              <div
+                class="absolute top-1 left-1 w-10 h-10 rounded-full flex items-center justify-center text-lg
+                      bg-white text-yellow-500 transition-all duration-300 transform z-10"
+                :class="{ 'translate-x-20': isDark }"
+              >
+                {{ isDark ? '🌙' : '☀️' }}
+              </div>
+            </div>
+          </label>
+        </div> 
 
         <div class="flex gap-3">
           <a
@@ -66,12 +72,8 @@
             target="_blank"
             rel="noopener noreferrer"
             class="flex items-center gap-2 flex-1 px-4 py-2 rounded-lg 
-                 shadow transition text-sm font-medium text-center"
-            :style="{
-              backgroundColor: 'var(--primary-color)',
-              borderColor: 'var(--primary-color)',
-              color: 'var(--primary-text-color)'
-            }"
+                 shadow transition text-sm font-medium text-center bg-white dark:bg-gray-700 border 
+                      hover:bg-blue-50 dark:hover:bg-gray-600"
           >
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path
@@ -94,12 +96,8 @@
             target="_blank"
             rel="noopener noreferrer"
             class="flex items-center gap-2 flex-1 px-4 py-2 rounded-lg 
-                 shadow transition text-sm font-medium text-center"
-            :style="{
-              backgroundColor: 'var(--primary-color)',
-              borderColor: 'var(--primary-color)',
-              color: 'var(--primary-text-color)'
-            }"
+                 shadow transition text-sm font-medium text-center bg-white dark:bg-gray-700 border 
+                      hover:bg-blue-50 dark:hover:bg-gray-600"
           >
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path
@@ -117,54 +115,20 @@
             Issue
           </a>
         </div>
-
-        <div>
-            <img src="https://img.shields.io/github/last-commit/Coconut-Aero/cn-mental-checklist?color=green&logo=github&style=for-the-badge" alt="Last Commit" class="h-5 inline" />
+        <div class="flex justify-center items-center">
+          <div>
+              <img src="https://img.shields.io/github/last-commit/Coconut-Aero/cn-mental-checklist?color=green&logo=github&style=for-the-badge" alt="Last Commit" class="h-5 inline" />
+          </div>
         </div>
-        <div class="text-sm text-gray-500 dark:text-gray-400">
-          <p>当前版本 {{ version }} </p>
+        <div class="flex justify-center items-center">
+          <div class="text-sm text-gray-500 dark:text-gray-400">
+            <p>当前版本 {{ version }} </p>
+          </div>
         </div>
       </div>
     </div>
   </transition>
-
-
-  <!-- 电脑端滑块 -->
-  <label class="hidden sm:flex items-center cursor-pointer select-none">
-    <div class="relative w-32 h-12">
-      <input type="checkbox" class="sr-only" v-model="isDark" />
-
-      <!-- 滑槽 -->
-      <div
-        class="block w-full h-full rounded-full transition-all duration-300
-               bg-gray-300 dark:bg-gray-600"
-      ></div>
-
-      <!-- 文字放上层 -->
-      <transition name="fade" mode="out-in">
-        <div
-          :key="isDark"  
-          class="absolute inset-0 flex items-center text-sm font-medium
-                text-gray-800 dark:text-gray-100 z-20 pointer-events-none"
-          :class="isDark ? 'justify-start pl-4' : 'justify-end pr-4'"
-        >
-          {{ isDark ? '暗色模式' : '亮色模式' }}
-        </div>
-      </transition>
-
-      <!-- 小圆球 -->
-      <div
-        class="absolute top-1 left-1 w-10 h-10 rounded-full flex items-center justify-center text-lg
-              bg-white text-yellow-500 transition-all duration-300 transform z-10"
-        :class="{ 'translate-x-20': isDark }"
-      >
-        {{ isDark ? '🌙' : '☀️' }}
-      </div>
-    </div>
-  </label>
 </div>
-
-
 
     <!-- 页面容器 -->
     <div class="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-colors duration-300">
@@ -196,31 +160,9 @@
 <script setup>
 import { ref, watch, onMounted, computed, watchEffect } from 'vue'
 
-const version = 'v0.2'
+const version = 'v0.2.1'
 
 const isMenuOpen = ref(false)
-
-
-const themes = [
-  { name: '蓝色', color: '#3b82f6' },
-  { name: '红色', color: '#ef4444' },
-  { name: '粉色', color: '#ec4899' },
-  { name: '紫色', color: '#8b5cf6' },
-  { name: '绿色', color: '#22c55e' },
-]
-
-const setTheme = (color) => {
-  console.log('设置主题色:', color)
-  document.documentElement.style.setProperty('--primary-color', color)
-  document.documentElement.style.setProperty('--primary-text-color', '#ffffff')
-}
-
-const clearTheme = () => {
-  console.log('清除主题色')
-  // 移除 primary-color，或者设回默认色
-  document.documentElement.style.removeProperty('--primary-color')
-  document.documentElement.style.removeProperty('--primary-text-color')
-}
 
 const badgeKey = ref(0)
 
