@@ -108,7 +108,9 @@ npm run preview
 
 欢迎 Issue、PR、建议或扩展量表加入！
 
-如你希望贡献新量表，请在 `/public/json/` 下添加量表定义 JSON，在`/src/components/`完成计算逻辑，并在页面逻辑中引用即可。
+如你希望贡献新量表，请在 `/public/json/` 下添加量表定义 JSON，在 `/src/components/` 完成计算逻辑，并在页面逻辑中引用即可。
+
+提交前请运行 `npm run build` 测试页面能否正常运行，并运行 `npm run check-radicals` 检查文字中是否存在康熙部首的污染。
 
 ---
 
