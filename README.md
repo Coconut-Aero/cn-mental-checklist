@@ -33,6 +33,7 @@
 - ✅ GAD-7 广泛性焦虑症量表（General Anxiety Disorder）
 - ✅ EPQ-88 艾森克人格问卷 龚耀先版本 （Eysenck Personality Questionnaire）
 - ✅ EPQ-85 艾森克人格问卷 陈仲庚版本 （Eysenck Personality Questionnaire）
+- ✅ CES-D 抑郁自评量表（Center for Epidemiologic Studies Depression Scale）
 
 ---
 
