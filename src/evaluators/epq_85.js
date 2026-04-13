@@ -1,5 +1,3 @@
-<script>
-
 export function evaluate(answers) {
     const results = []
     const P_Score = calculateP(answers)
@@ -264,5 +262,3 @@ function calculateL(answers) {
 
   return score;
 }
-
-</script>

@@ -6,7 +6,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "check-radicals": "node ./scripts/checkRadicals.js",
-    "new": "node scripts/new.js"
+    "new": "node scripts/new.js",
+    "test": "vitest"
   },
   "dependencies": {
     "@vitejs/plugin-vue": "^5.2.3",

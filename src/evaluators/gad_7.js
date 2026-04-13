@@ -1,4 +1,3 @@
-<script>
 export function evaluate(answers) {
     const results = []
     const totalScore = answers.reduce((acc, raw) => acc + raw , 0)
@@ -28,4 +27,3 @@ export function evaluate(answers) {
     return results
 
 }
-</script>

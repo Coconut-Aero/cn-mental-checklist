@@ -1,4 +1,3 @@
-<script>
 export function evaluate(answers) {
     const results = []
     const totalScore = answers.slice(0, 9).reduce((acc, raw) => acc + raw, 0);
@@ -86,4 +85,3 @@ export function evaluate(answers) {
     return results
 
 }
-</script>

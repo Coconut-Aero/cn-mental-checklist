@@ -1,5 +1,3 @@
-<script>
-
 /**
  * 因子映射
  */
@@ -107,4 +105,3 @@ export function evaluate(answers) {
 
   return results
 }
-</script>

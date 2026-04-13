@@ -1,4 +1,3 @@
-<script>
 export function evaluate(answers) {
     const reverseIndexSet = new Set([3, 7, 11, 15])  // 反向计分题索引：4, 8, 12, 16
     const results = []
@@ -30,4 +29,3 @@ export function evaluate(answers) {
 
     return results
 }
-</script>
